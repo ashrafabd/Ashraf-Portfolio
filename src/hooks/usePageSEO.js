@@ -1,15 +1,23 @@
-import { useEffect } from 'react'
-import { siteConfig } from '@/data/portfolio'
+import { useEffect } from "react";
+import { useTranslation } from "@/context/LocaleContext";
+import { siteConfig } from "@/data/portfolio";
 
 export function usePageSEO({ title, description } = {}) {
+  const t = useTranslation();
+
   useEffect(() => {
     document.title = title
-      ? `${title} · ${siteConfig.name}`
-      : siteConfig.seo.defaultTitle
+      ? `${title} · ${t.site.name}`
+      : t.seo.defaultTitle || siteConfig.seo.defaultTitle;
 
-    const meta = document.querySelector('meta[name="description"]')
+    const meta = document.querySelector('meta[name="description"]');
     if (meta) {
-      meta.setAttribute('content', description || siteConfig.seo.defaultDescription)
+      meta.setAttribute(
+        "content",
+        description ||
+          t.seo.defaultDescription ||
+          siteConfig.seo.defaultDescription,
+      );
     }
-  }, [title, description])
+  }, [title, description, t]);
 }

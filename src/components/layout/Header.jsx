@@ -1,41 +1,46 @@
-import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Sun, Moon, Download, ArrowUpRight } from 'lucide-react'
-import { navLinks, siteConfig } from '@/data/portfolio'
-import { useTheme } from '@/context/ThemeContext'
-import { Button } from '@/components/ui/Button'
-import { cn } from '@/lib/utils'
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Sun, Moon, Download, ArrowUpRight } from "lucide-react";
+import { navLinks, siteConfig } from "@/data/portfolio";
+import { useTheme } from "@/context/ThemeContext";
+import { useLocale, useTranslation } from "@/context/LocaleContext";
+import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const { theme, toggleTheme } = useTheme()
-  const location = useLocation()
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const { locale, setLocale, languages } = useLocale();
+  const t = useTranslation();
+  const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
-    setMobileOpen(false)
-  }, [location.pathname])
+    setMobileOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [mobileOpen])
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   return (
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled
-            ? 'glass border-b border-zinc-200/60 dark:border-zinc-800/60 shadow-sm'
-            : 'bg-transparent',
+            ? "glass border-b border-zinc-200/60 dark:border-zinc-800/60 shadow-sm"
+            : "bg-transparent",
         )}
       >
         <div className="container-wide mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,7 +50,7 @@ export function Header() {
                 A
               </div>
               <span className="font-display font-semibold text-zinc-900 dark:text-white hidden sm:block">
-                {siteConfig.name.split(' ')[0]}
+                {t.site.shortName}
               </span>
             </Link>
 
@@ -55,13 +60,13 @@ export function Header() {
                   key={link.path}
                   to={link.path}
                   className={cn(
-                    'px-3 py-2 text-sm rounded-lg transition-colors',
+                    "px-3 py-2 text-sm rounded-lg transition-colors",
                     location.pathname === link.path
-                      ? 'text-indigo-600 dark:text-indigo-400 font-medium'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white',
+                      ? "text-indigo-600 dark:text-indigo-400 font-medium"
+                      : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white",
                   )}
                 >
-                  {link.label}
+                  {t.nav[link.key]}
                 </Link>
               ))}
             </nav>
@@ -70,22 +75,46 @@ export function Header() {
               <button
                 type="button"
                 onClick={toggleTheme}
-                aria-label="Toggle theme"
+                aria-label={t.header.themeToggle}
                 className="w-10 h-10 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
               >
-                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {theme === "dark" ? (
+                  <Sun className="w-4 h-4" />
+                ) : (
+                  <Moon className="w-4 h-4" />
+                )}
               </button>
 
-              <a href={siteConfig.resumeUrl} download className="hidden md:inline-flex">
+              <label className="sr-only" htmlFor="locale-select">
+                {t.header.language}
+              </label>
+              <select
+                id="locale-select"
+                value={locale}
+                onChange={(event) => setLocale(event.target.value)}
+                className="hidden sm:inline-flex h-10 rounded-full border border-zinc-200 bg-white dark:bg-zinc-900/70 dark:border-zinc-800 text-sm text-zinc-700 dark:text-zinc-200 px-3 transition-colors"
+              >
+                {Object.entries(languages).map(([code, label]) => (
+                  <option key={code} value={code}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+
+              <a
+                href={siteConfig.resumeUrl}
+                download
+                className="hidden md:inline-flex"
+              >
                 <Button variant="secondary" size="sm">
                   <Download className="w-4 h-4" />
-                  Resume
+                  {t.header.downloadResume}
                 </Button>
               </a>
 
               <Link to="/contact" className="hidden sm:inline-flex">
                 <Button size="sm">
-                  Contact
+                  {t.nav.contact}
                   <ArrowUpRight className="w-4 h-4" />
                 </Button>
               </Link>
@@ -93,7 +122,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setMobileOpen(true)}
-                aria-label="Open menu"
+                aria-label={t.header.openMenu}
                 className="xl:hidden w-10 h-10 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
               >
                 <Menu className="w-5 h-5" />
@@ -114,18 +143,20 @@ export function Header() {
               onClick={() => setMobileOpen(false)}
             />
             <motion.nav
-              initial={{ x: '100%' }}
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed top-0 right-0 bottom-0 z-[70] w-full max-w-sm glass border-l border-zinc-200/60 dark:border-zinc-800/60 xl:hidden"
             >
               <div className="flex items-center justify-between p-4 border-b border-zinc-200/60 dark:border-zinc-800/60">
-                <span className="font-display font-semibold">Menu</span>
+                <span className="font-display font-semibold">
+                  {t.header.menu}
+                </span>
                 <button
                   type="button"
                   onClick={() => setMobileOpen(false)}
-                  aria-label="Close menu"
+                  aria-label={t.header.closeMenu}
                   className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-zinc-100 dark:hover:bg-zinc-800"
                 >
                   <X className="w-5 h-5" />
@@ -142,13 +173,13 @@ export function Header() {
                     <Link
                       to={link.path}
                       className={cn(
-                        'block px-4 py-3 rounded-xl text-base transition-colors',
+                        "block px-4 py-3 rounded-xl text-base transition-colors",
                         location.pathname === link.path
-                          ? 'bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-medium'
-                          : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800',
+                          ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-medium"
+                          : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800",
                       )}
                     >
-                      {link.label}
+                      {t.nav[link.key]}
                     </Link>
                   </motion.div>
                 ))}
@@ -156,11 +187,11 @@ export function Header() {
                   <a href={siteConfig.resumeUrl} download className="block">
                     <Button variant="secondary" className="w-full">
                       <Download className="w-4 h-4" />
-                      Download Resume
+                      {t.header.downloadResume}
                     </Button>
                   </a>
                   <Link to="/contact" className="block">
-                    <Button className="w-full">Contact Me</Button>
+                    <Button className="w-full">{t.nav.contact}</Button>
                   </Link>
                 </div>
               </div>
@@ -169,5 +200,5 @@ export function Header() {
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }

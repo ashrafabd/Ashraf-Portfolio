@@ -1,29 +1,32 @@
-import { motion } from 'framer-motion'
-import { Award } from 'lucide-react'
-import { usePageSEO } from '@/hooks/usePageSEO'
-import { skillCategories, certifications } from '@/data/portfolio'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { Card } from '@/components/ui/Card'
-import { SkillBar } from '@/components/ui/SkillBar'
-import { Badge } from '@/components/ui/Badge'
-import { staggerContainer, staggerItem, viewportOnce } from '@/lib/motion'
+import { motion } from "framer-motion";
+import { Award } from "lucide-react";
+import { useTranslation } from "@/context/LocaleContext";
+import { usePageSEO } from "@/hooks/usePageSEO";
+import { skillCategories, certifications } from "@/data/portfolio";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Card } from "@/components/ui/Card";
+import { SkillBar } from "@/components/ui/SkillBar";
+import { Badge } from "@/components/ui/Badge";
+import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 export default function Skills() {
-  usePageSEO({
-    title: 'Skills',
-    description: 'Technical skills in QA, automation, programming, and testing tools.',
-  })
+  const t = useTranslation();
 
-  const relatedCerts = certifications.slice(0, 4)
+  usePageSEO({
+    title: t.nav.skills,
+    description: t.skills.description,
+  });
+
+  const relatedCerts = certifications.slice(0, 4);
 
   return (
     <div>
       <section className="section-padding pt-24 lg:pt-32">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Capabilities"
-            title="Skills"
-            description="A comprehensive toolkit spanning manual testing, automation engineering, and modern DevOps practices."
+            eyebrow={t.skills.eyebrow}
+            title={t.skills.title}
+            description={t.skills.description}
           />
 
           <div className="space-y-16">
@@ -42,7 +45,11 @@ export default function Skills() {
                   {skills.map((skill, i) => (
                     <motion.div key={skill.name} variants={staggerItem}>
                       <Card hover={false}>
-                        <SkillBar name={skill.name} level={skill.level} delay={i * 0.05} />
+                        <SkillBar
+                          name={skill.name}
+                          level={skill.level}
+                          delay={i * 0.05}
+                        />
                       </Card>
                     </motion.div>
                   ))}
@@ -53,9 +60,9 @@ export default function Skills() {
 
           <div className="mt-20">
             <SectionHeading
-              eyebrow="Interactive"
-              title="Skill Cards"
-              description="Quick-reference proficiency overview across key domains."
+              eyebrow={t.skills.skillCards}
+              title={t.skills.skillCards}
+              description={t.skills.skillCardsDescription}
             />
             <motion.div
               initial="hidden"
@@ -90,9 +97,9 @@ export default function Skills() {
 
           <div className="mt-20">
             <SectionHeading
-              eyebrow="Verified"
-              title="Related Certifications"
-              description="Credentials that validate expertise across these skill areas."
+              eyebrow={t.skills.verified}
+              title={t.skills.verified}
+              description={t.skills.verifiedDescription}
             />
             <motion.div
               initial="hidden"
@@ -108,7 +115,9 @@ export default function Skills() {
                       {cert.logo}
                     </div>
                     <h4 className="font-semibold text-sm">{cert.title}</h4>
-                    <p className="text-xs text-zinc-500 mt-1">{cert.organization}</p>
+                    <p className="text-xs text-zinc-500 mt-1">
+                      {cert.organization}
+                    </p>
                     <Badge variant="outline" className="mt-3">
                       <Award className="w-3 h-3 mr-1" />
                       {cert.date}
@@ -121,5 +130,5 @@ export default function Skills() {
         </div>
       </section>
     </div>
-  )
+  );
 }

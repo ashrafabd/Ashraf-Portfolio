@@ -1,45 +1,48 @@
-import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
-import { Clock, ArrowRight, Tag } from 'lucide-react'
-import { usePageSEO } from '@/hooks/usePageSEO'
-import { blogPosts, blogCategories } from '@/data/portfolio'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { FilterTabs } from '@/components/ui/FilterTabs'
-import { SearchInput } from '@/components/ui/SearchInput'
-import { Badge } from '@/components/ui/Badge'
-import { Card } from '@/components/ui/Card'
-import { staggerContainer, staggerItem, viewportOnce } from '@/lib/motion'
+import { useState, useMemo } from "react";
+import { motion } from "framer-motion";
+import { Clock, ArrowRight, Tag } from "lucide-react";
+import { useTranslation } from "@/context/LocaleContext";
+import { usePageSEO } from "@/hooks/usePageSEO";
+import { blogPosts, blogCategories } from "@/data/portfolio";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { FilterTabs } from "@/components/ui/FilterTabs";
+import { SearchInput } from "@/components/ui/SearchInput";
+import { Badge } from "@/components/ui/Badge";
+import { Card } from "@/components/ui/Card";
+import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 export default function Blog() {
-  usePageSEO({
-    title: 'Blog',
-    description: 'Articles on QA, automation, testing, and career growth.',
-  })
+  const t = useTranslation();
 
-  const [filter, setFilter] = useState('All')
-  const [search, setSearch] = useState('')
+  usePageSEO({
+    title: t.nav.blog,
+    description: t.blog.description,
+  });
+
+  const [filter, setFilter] = useState("All");
+  const [search, setSearch] = useState("");
 
   const filtered = useMemo(() => {
     return blogPosts.filter((post) => {
-      const matchFilter = filter === 'All' || post.category === filter
-      const q = search.toLowerCase()
+      const matchFilter = filter === "All" || post.category === filter;
+      const q = search.toLowerCase();
       const matchSearch =
         !q ||
         post.title.toLowerCase().includes(q) ||
         post.excerpt.toLowerCase().includes(q) ||
-        post.tags.some((t) => t.toLowerCase().includes(q))
-      return matchFilter && matchSearch
-    })
-  }, [filter, search])
+        post.tags.some((t) => t.toLowerCase().includes(q));
+      return matchFilter && matchSearch;
+    });
+  }, [filter, search]);
 
   return (
     <div>
       <section className="section-padding pt-24 lg:pt-32">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Insights"
-            title="Blog"
-            description="Thoughts on quality engineering, test automation, and building a career in technology."
+            eyebrow={t.blog.eyebrow}
+            title={t.blog.title}
+            description={t.blog.description}
           />
 
           <FilterTabs
@@ -52,7 +55,7 @@ export default function Blog() {
           <SearchInput
             value={search}
             onChange={setSearch}
-            placeholder="Search articles, tags..."
+            placeholder={t.blog.searchPlaceholder}
             className="max-w-md mx-auto mb-14"
           />
 
@@ -92,13 +95,16 @@ export default function Blog() {
                   <div className="flex items-center justify-between mt-6 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/60">
                     <span className="flex items-center gap-1.5 text-xs text-zinc-500">
                       <Clock className="w-3.5 h-3.5" />
-                      {post.readTime} read
+                      {t.blog.readTime.replace(
+                        "{time}",
+                        post.readTime.replace(/\s*min$/, ""),
+                      )}
                     </span>
                     <span className="text-xs text-zinc-500">{post.date}</span>
                   </div>
 
                   <div className="flex items-center gap-1 mt-3 text-sm font-medium text-indigo-600 dark:text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Read article
+                    {t.blog.readArticle}
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </Card>
@@ -107,10 +113,12 @@ export default function Blog() {
           </motion.div>
 
           {filtered.length === 0 && (
-            <p className="text-center text-zinc-500 py-20">No articles found.</p>
+            <p className="text-center text-zinc-500 py-20">
+              {t.blog.noArticles}
+            </p>
           )}
         </div>
       </section>
     </div>
-  )
+  );
 }

@@ -1,0 +1,177 @@
+{
+  "site": {
+    "name": "Ashraf Muneer Abd Alkhaliq",
+    "shortName": "Ashraf",
+    "title": "Software Quality Assurance Engineer",
+    "tagline": "QA engineer building reliable automation and quality systems.",
+    "resume": "Resume"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "certifications": "Certifications",
+    "courses": "Courses",
+    "awards": "Awards",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "header": {
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "downloadResume": "Resume",
+    "contact": "Contact",
+    "language": "Language",
+    "themeToggle": "Toggle theme",
+    "menu": "Menu"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "more": "More",
+    "copyright": "All rights reserved.",
+    "builtWith": "Built with React, Tailwind CSS & Framer Motion",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "email": "Email"
+  },
+  "hero": {
+    "available": "Available for opportunities",
+    "description": "I deliver manual and automation QA solutions for web applications, with a strong focus on Cypress, API validation, and reliable release quality.",
+    "downloadResume": "Download Resume",
+    "getInTouch": "Get in Touch",
+    "years": "7+ Years",
+    "certified": "ISTQB Certified"
+  },
+  "home": {
+    "featuredSkills": "Featured Skills",
+    "featuredSkillsDescription": "Core competencies honed across enterprise SaaS, fintech, and cloud platforms.",
+    "work": "Work",
+    "portfolio": "Featured Projects",
+    "portfolioDescription": "Selected work demonstrating automation architecture, API quality, and engineering impact.",
+    "contactCTA": "Let’s build better quality together.",
+    "contactDescription": "Whether it’s automation, manual testing, or QA strategy, I’m ready to help.",
+    "contactButton": "Contact me",
+    "yearsOfExperience": "Years of Experience",
+    "projectsCompleted": "Projects Completed",
+    "certifications": "Certifications",
+    "awards": "Awards",
+    "totalAwards": "Total Awards",
+    "companyLevel": "Company Level",
+    "departmentLevel": "Department Level",
+    "community": "Community"
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "Crafting quality at every layer",
+    "story": "A software quality assurance engineer seeking manual or automation QA roles where I can contribute to organizational success through strong programming, analytical skills, and quality-driven experience.",
+    "professionalJourney": "Professional Journey",
+    "expertise": "Areas of Expertise",
+    "future": "Professional Goals",
+    "education": "Academic Foundation",
+    "values": "Core Values"
+  },
+  "experience": {
+    "eyebrow": "Career",
+    "title": "Experience",
+    "description": "A track record of elevating quality across startups and enterprise technology companies.",
+    "responsibilities": "Responsibilities",
+    "achievements": "Achievements"
+  },
+  "projects": {
+    "eyebrow": "Portfolio",
+    "title": "Projects",
+    "description": "A curated showcase of automation frameworks, API testing suites, and quality engineering tools.",
+    "searchPlaceholder": "Search projects, technologies...",
+    "challenge": "Challenge:",
+    "solution": "Solution:",
+    "result": "Result:",
+    "noMatch": "No projects match your search.",
+    "github": "GitHub",
+    "demo": "Demo"
+  },
+  "skills": {
+    "eyebrow": "Capabilities",
+    "title": "Skills",
+    "description": "A comprehensive toolkit spanning manual testing, automation engineering, and modern DevOps practices.",
+    "skillCards": "Skill Cards",
+    "skillCardsDescription": "Quick-reference proficiency overview across key domains.",
+    "verified": "Related Certifications",
+    "verifiedDescription": "Credentials that validate expertise across these skill areas."
+  },
+  "certifications": {
+    "eyebrow": "Credentials",
+    "title": "Certifications",
+    "description": "Industry-recognized certifications validating expertise in quality engineering and cloud technologies.",
+    "verify": "Verify Credential"
+  },
+  "courses": {
+    "eyebrow": "Learning",
+    "title": "Courses",
+    "description": "Continuous learning journey and completed courses.",
+    "totalCourses": "Total Courses",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "progressLabel": "Progress",
+    "certified": "Certified"
+  },
+  "awards": {
+    "eyebrow": "Recognition",
+    "title": "Awards",
+    "description": "Honors earned for excellence in quality engineering, innovation, and team leadership.",
+    "level": {
+      "company": "Company",
+      "department": "Department",
+      "team": "Team",
+      "community": "Community"
+    },
+    "levelSuffix": "Level"
+  },
+  "blog": {
+    "eyebrow": "Insights",
+    "title": "Blog",
+    "description": "Thoughts on quality engineering, test automation, and building a career in technology.",
+    "searchPlaceholder": "Search articles, tags...",
+    "noArticles": "No articles found.",
+    "readArticle": "Read article",
+    "readTime": "{time} min read"
+  },
+  "contact": {
+    "eyebrow": "Connect",
+    "title": "Contact",
+    "description": "Have a role, project, or collaboration in mind? I'd love to hear from you.",
+    "socialLinks": "Social Links",
+    "messageSent": "Message sent!",
+    "thankYou": "Thank you for reaching out. I'll get back to you within 48 hours.",
+    "name": "Name",
+    "email": "Email",
+    "company": "Company",
+    "subject": "Subject",
+    "message": "Message",
+    "placeholders": {
+      "name": "Your name",
+      "email": "you@company.com",
+      "company": "Your company (optional)",
+      "subject": "What's this about?",
+      "message": "Tell me about the opportunity..."
+    },
+    "send": "Send Message",
+    "connectWithMe": "Connect with me",
+    "globalReach": "Global Reach"
+  },
+  "common": {
+    "downloadResume": "Download Resume",
+    "contact": "Contact",
+    "sendMessage": "Send Message",
+    "all": "All"
+  },
+  "seo": {
+    "defaultTitle": "Ashraf Muneer Abd Alkhaliq — Software Quality Assurance Engineer",
+    "defaultDescription": "Portfolio of a Software Quality Assurance Engineer with experience in automation, API testing, and quality engineering."
+  },
+  "languages": {
+    "en": "English",
+    "ar": "العربية"
+  }
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Send, CheckCircle } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { useTranslation } from "@/context/LocaleContext";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { siteConfig } from "@/data/portfolio";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -56,10 +57,11 @@ function WorldMap() {
 }
 
 export default function Contact() {
+  const t = useTranslation();
+
   usePageSEO({
-    title: "Contact",
-    description:
-      "Get in touch with Ashraf Muneer Abd Alkhaliq for QA opportunities and collaborations.",
+    title: t.nav.contact,
+    description: t.contact.description,
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -84,9 +86,9 @@ export default function Contact() {
       <section className="section-padding pt-24 lg:pt-32">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Connect"
-            title="Contact"
-            description="Have a role, project, or collaboration in mind? I'd love to hear from you."
+            eyebrow={t.contact.eyebrow}
+            title={t.contact.title}
+            description={t.contact.description}
           />
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -99,10 +101,11 @@ export default function Contact() {
               {submitted ? (
                 <Card hover={false} className="text-center py-16">
                   <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">Message sent!</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {t.contact.messageSent}
+                  </h3>
                   <p className="text-zinc-600 dark:text-zinc-400">
-                    Thank you for reaching out. I&apos;ll get back to you within
-                    48 hours.
+                    {t.contact.thankYou}
                   </p>
                 </Card>
               ) : (
@@ -114,14 +117,14 @@ export default function Contact() {
                           htmlFor="name"
                           className="text-sm font-medium mb-2 block"
                         >
-                          Name
+                          {t.contact.name}
                         </label>
                         <Input
                           id="name"
                           required
                           value={form.name}
                           onChange={update("name")}
-                          placeholder="Your name"
+                          placeholder={t.contact.placeholders.name}
                         />
                       </div>
                       <div>
@@ -129,7 +132,7 @@ export default function Contact() {
                           htmlFor="email"
                           className="text-sm font-medium mb-2 block"
                         >
-                          Email
+                          {t.contact.email}
                         </label>
                         <Input
                           id="email"
@@ -137,7 +140,7 @@ export default function Contact() {
                           required
                           value={form.email}
                           onChange={update("email")}
-                          placeholder="you@company.com"
+                          placeholder={t.contact.placeholders.email}
                         />
                       </div>
                     </div>
@@ -146,13 +149,13 @@ export default function Contact() {
                         htmlFor="company"
                         className="text-sm font-medium mb-2 block"
                       >
-                        Company
+                        {t.contact.company}
                       </label>
                       <Input
                         id="company"
                         value={form.company}
                         onChange={update("company")}
-                        placeholder="Your company (optional)"
+                        placeholder={t.contact.placeholders.company}
                       />
                     </div>
                     <div>
@@ -160,14 +163,14 @@ export default function Contact() {
                         htmlFor="subject"
                         className="text-sm font-medium mb-2 block"
                       >
-                        Subject
+                        {t.contact.subject}
                       </label>
                       <Input
                         id="subject"
                         required
                         value={form.subject}
                         onChange={update("subject")}
-                        placeholder="What's this about?"
+                        placeholder={t.contact.placeholders.subject}
                       />
                     </div>
                     <div>
@@ -175,19 +178,19 @@ export default function Contact() {
                         htmlFor="message"
                         className="text-sm font-medium mb-2 block"
                       >
-                        Message
+                        {t.contact.message}
                       </label>
                       <Textarea
                         id="message"
                         required
                         value={form.message}
                         onChange={update("message")}
-                        placeholder="Tell me about the opportunity..."
+                        placeholder={t.contact.placeholders.message}
                       />
                     </div>
                     <Button type="submit" className="w-full" size="lg">
                       <Send className="w-4 h-4" />
-                      Send Message
+                      {t.contact.send}
                     </Button>
                   </form>
                 </Card>
@@ -203,22 +206,24 @@ export default function Contact() {
               className="space-y-8"
             >
               <div>
-                <h3 className="font-semibold text-lg mb-4">Social Links</h3>
+                <h3 className="font-semibold text-lg mb-4">
+                  {t.contact.socialLinks}
+                </h3>
                 <div className="space-y-3">
                   {[
                     {
                       icon: LinkedinIcon,
-                      label: "LinkedIn",
+                      label: t.footer.linkedin,
                       href: siteConfig.social.linkedin,
                     },
                     {
                       icon: GithubIcon,
-                      label: "GitHub",
+                      label: t.footer.github,
                       href: siteConfig.social.github,
                     },
                     {
                       icon: Mail,
-                      label: "Email",
+                      label: t.footer.email,
                       href: siteConfig.social.email,
                     },
                   ].map(({ icon: Icon, label, href }) => (
@@ -235,9 +240,9 @@ export default function Contact() {
                       <div>
                         <p className="font-medium">{label}</p>
                         <p className="text-sm text-zinc-500">
-                          {label === "Email"
+                          {label === t.footer.email
                             ? siteConfig.email
-                            : "Connect with me"}
+                            : t.contact.connectWithMe}
                         </p>
                       </div>
                     </a>
@@ -246,7 +251,9 @@ export default function Contact() {
               </div>
 
               <div>
-                <h3 className="font-semibold text-lg mb-4">Global Reach</h3>
+                <h3 className="font-semibold text-lg mb-4">
+                  {t.contact.globalReach}
+                </h3>
                 <WorldMap />
               </div>
             </motion.div>

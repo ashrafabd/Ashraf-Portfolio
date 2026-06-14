@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Heart, Compass, Target } from "lucide-react";
 import { usePageSEO } from "@/hooks/usePageSEO";
+import { useTranslation } from "@/context/LocaleContext";
 import { about } from "@/data/portfolio";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
@@ -10,10 +11,11 @@ import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 const valueIcons = [Heart, Compass, Target, GraduationCap];
 
 export default function About() {
+  const t = useTranslation();
+
   usePageSEO({
-    title: "About",
-    description:
-      "Personal story and professional journey of Ashraf Muneer Abd Alkhaliq, Software Quality Assurance Engineer.",
+    title: t.nav.about,
+    description: t.about.story,
   });
 
   return (
@@ -22,9 +24,9 @@ export default function About() {
         <div className="container-wide mx-auto">
           <SectionHeading
             align="left"
-            eyebrow="About"
-            title="Crafting quality at every layer"
-            description={about.story}
+            eyebrow={t.about.eyebrow}
+            title={t.about.title}
+            description={t.about.story}
           />
         </div>
       </section>
@@ -34,7 +36,7 @@ export default function About() {
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div>
               <h3 className="font-display text-2xl font-semibold mb-4">
-                Professional Journey
+                {t.about.professionalJourney}
               </h3>
               <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">
                 {about.journey}
@@ -77,7 +79,10 @@ export default function About() {
 
       <section className="section-padding">
         <div className="container-wide mx-auto">
-          <SectionHeading eyebrow="Education" title="Academic Foundation" />
+          <SectionHeading
+            eyebrow={t.about.education}
+            title={t.about.education}
+          />
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -105,7 +110,7 @@ export default function About() {
 
       <section className="section-padding bg-zinc-50/80 dark:bg-zinc-900/30">
         <div className="container-wide mx-auto">
-          <SectionHeading eyebrow="Values" title="Core Values" />
+          <SectionHeading eyebrow={t.about.values} title={t.about.values} />
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -139,8 +144,8 @@ export default function About() {
             <div>
               <SectionHeading
                 align="left"
-                eyebrow="Expertise"
-                title="Areas of Expertise"
+                eyebrow={t.about.expertise}
+                title={t.about.expertise}
               />
               <div className="flex flex-wrap gap-2">
                 {about.expertise.map((item) => (
@@ -153,8 +158,8 @@ export default function About() {
             <div>
               <SectionHeading
                 align="left"
-                eyebrow="Future"
-                title="Professional Goals"
+                eyebrow={t.about.future}
+                title={t.about.future}
               />
               <ul className="space-y-4">
                 {about.goals.map((goal, i) => (

@@ -1,34 +1,44 @@
-import { motion } from 'framer-motion'
-import { Trophy, Star } from 'lucide-react'
-import { usePageSEO } from '@/hooks/usePageSEO'
-import { awards, awardStats } from '@/data/portfolio'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { Card } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
-import { StatCard } from '@/components/ui/SkillBar'
-import { staggerContainer, staggerItem, viewportOnce } from '@/lib/motion'
+import { motion } from "framer-motion";
+import { Trophy, Star } from "lucide-react";
+import { useTranslation } from "@/context/LocaleContext";
+import { usePageSEO } from "@/hooks/usePageSEO";
+import { awards, awardStats } from "@/data/portfolio";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Card } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
+import { StatCard } from "@/components/ui/SkillBar";
+import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 const levelColors = {
-  Company: 'bg-amber-500/10 text-amber-600 dark:text-amber-400',
-  Department: 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400',
-  Team: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
-  Community: 'bg-violet-500/10 text-violet-600 dark:text-violet-400',
-}
+  Company: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+  Department: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
+  Team: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+  Community: "bg-violet-500/10 text-violet-600 dark:text-violet-400",
+};
 
 export default function Awards() {
+  const t = useTranslation();
+
+  const formatLevel = (level) => {
+    const label = t.awards.level[level.toLowerCase()];
+    return label
+      ? `${label} ${t.awards.levelSuffix}`
+      : `${level} ${t.awards.levelSuffix}`;
+  };
+
   usePageSEO({
-    title: 'Awards',
-    description: 'Awards and recognition received throughout QA career.',
-  })
+    title: t.nav.awards,
+    description: t.awards.description,
+  });
 
   return (
     <div>
       <section className="section-padding pt-24 lg:pt-32">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Recognition"
-            title="Awards"
-            description="Honors earned for excellence in quality engineering, innovation, and team leadership."
+            eyebrow={t.awards.eyebrow}
+            title={t.awards.title}
+            description={t.awards.description}
           />
 
           <motion.div
@@ -38,11 +48,19 @@ export default function Awards() {
             variants={staggerContainer}
             className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16"
           >
-            {awardStats.map((stat) => (
-              <motion.div key={stat.label} variants={staggerItem}>
-                <StatCard label={stat.label} value={stat.value} />
-              </motion.div>
-            ))}
+            {awardStats.map((stat, i) => {
+              const awardStatKeys = [
+                t.home.totalAwards,
+                t.home.companyLevel,
+                t.home.departmentLevel,
+                t.home.community,
+              ];
+              return (
+                <motion.div key={stat.label} variants={staggerItem}>
+                  <StatCard label={awardStatKeys[i]} value={stat.value} />
+                </motion.div>
+              );
+            })}
           </motion.div>
 
           <motion.div
@@ -64,9 +82,11 @@ export default function Awards() {
                         <span
                           className={`text-xs font-medium px-3 py-1 rounded-full ${levelColors[award.level]}`}
                         >
-                          {award.level} Level
+                          {formatLevel(award.level)}
                         </span>
-                        <span className="text-sm text-zinc-500">{award.date}</span>
+                        <span className="text-sm text-zinc-500">
+                          {award.date}
+                        </span>
                       </div>
                       <h3 className="font-display text-xl lg:text-2xl font-semibold mb-2">
                         {award.title}
@@ -82,9 +102,9 @@ export default function Awards() {
                           <Star
                             key={j}
                             className={`w-4 h-4 ${
-                              j < 5 - i % 2
-                                ? 'text-amber-400 fill-amber-400'
-                                : 'text-zinc-300 dark:text-zinc-700'
+                              j < 5 - (i % 2)
+                                ? "text-amber-400 fill-amber-400"
+                                : "text-zinc-300 dark:text-zinc-700"
                             }`}
                           />
                         ))}
@@ -98,5 +118,5 @@ export default function Awards() {
         </div>
       </section>
     </div>
-  )
+  );
 }

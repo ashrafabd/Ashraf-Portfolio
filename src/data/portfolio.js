@@ -19,16 +19,16 @@ export const siteConfig = {
 };
 
 export const navLinks = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Experience", path: "/experience" },
-  { label: "Projects", path: "/projects" },
-  { label: "Skills", path: "/skills" },
-  { label: "Certifications", path: "/certifications" },
-  { label: "Courses", path: "/courses" },
-  { label: "Awards", path: "/awards" },
-  { label: "Blog", path: "/blog" },
-  { label: "Contact", path: "/contact" },
+  { key: "home", path: "/" },
+  { key: "about", path: "/about" },
+  { key: "experience", path: "/experience" },
+  { key: "projects", path: "/projects" },
+  { key: "skills", path: "/skills" },
+  { key: "certifications", path: "/certifications" },
+  { key: "courses", path: "/courses" },
+  { key: "awards", path: "/awards" },
+  { key: "blog", path: "/blog" },
+  { key: "contact", path: "/contact" },
 ];
 
 export const stats = [

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Award } from "lucide-react";
+import { useTranslation } from "@/context/LocaleContext";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { certifications, certProviders } from "@/data/portfolio";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -11,10 +12,11 @@ import { Button } from "@/components/ui/Button";
 import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 export default function Certifications() {
+  const t = useTranslation();
+
   usePageSEO({
-    title: "Certifications",
-    description:
-      "Professional certifications and credentials held by Ashraf Muneer Abd Alkhaliq.",
+    title: t.nav.certifications,
+    description: t.certifications.description,
   });
 
   const [filter, setFilter] = useState("All");
@@ -29,9 +31,9 @@ export default function Certifications() {
       <section className="section-padding pt-24 lg:pt-32">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Credentials"
-            title="Certifications"
-            description="Industry-recognized certifications validating expertise in quality engineering and cloud technologies."
+            eyebrow={t.certifications.eyebrow}
+            title={t.certifications.title}
+            description={t.certifications.description}
           />
 
           <FilterTabs
@@ -77,7 +79,7 @@ export default function Certifications() {
                     >
                       <Button variant="outline" size="sm" className="w-full">
                         <Award className="w-4 h-4" />
-                        Verify Credential
+                        {t.certifications.verify}
                         <ExternalLink className="w-3 h-3" />
                       </Button>
                     </a>

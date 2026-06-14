@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import heroGraphic from "@/assets/hero.png";
 import { usePageSEO } from "@/hooks/usePageSEO";
+import { useTranslation } from "@/context/LocaleContext";
 import {
   siteConfig,
   stats,
@@ -37,6 +38,7 @@ const iconMap = { shield: Shield, target: Target, zap: Zap };
 
 export default function Home() {
   usePageSEO();
+  const t = useTranslation();
 
   const featuredProjects = projects.slice(0, 3);
 
@@ -57,32 +59,26 @@ export default function Home() {
               variants={slideInLeft}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Badge className="mb-6">Available for opportunities</Badge>
+              <Badge className="mb-6">{t.hero.available}</Badge>
               <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-zinc-900 dark:text-white leading-[1.05]">
-                {siteConfig.name.split(" ")[0]}
-                <br />
-                <span className="text-gradient">
-                  {siteConfig.name.split(" ")[1]}
-                </span>
+                {t.site.shortName}
               </h1>
               <p className="mt-4 text-xl sm:text-2xl text-zinc-600 dark:text-zinc-400 font-medium">
-                {siteConfig.title}
+                {t.site.title}
               </p>
               <p className="mt-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl">
-                I deliver manual and automation QA solutions for web
-                applications, with a strong focus on Cypress, API validation,
-                and reliable release quality.
+                {t.hero.description}
               </p>
               <div className="flex flex-wrap gap-4 mt-10">
                 <a href={siteConfig.resumeUrl} download>
                   <Button size="lg">
                     <Download className="w-5 h-5" />
-                    Download Resume
+                    {t.hero.downloadResume}
                   </Button>
                 </a>
                 <Link to="/contact">
                   <Button variant="outline" size="lg">
-                    Get in Touch
+                    {t.hero.getInTouch}
                     <ArrowRight className="w-5 h-5" />
                   </Button>
                 </Link>
@@ -117,10 +113,10 @@ export default function Home() {
                         </div>
                         <div>
                           <p className="font-semibold text-white">
-                            {siteConfig.name}
+                            {t.site.name}
                           </p>
                           <p className="text-sm text-zinc-400">
-                            {siteConfig.title}
+                            {t.site.title}
                           </p>
                         </div>
                       </div>
@@ -136,7 +132,7 @@ export default function Home() {
                   }}
                   className="absolute -top-4 -right-4 glass-card px-4 py-2 text-sm font-medium"
                 >
-                  7+ Years
+                  {t.hero.years}
                 </motion.div>
                 <motion.div
                   animate={{ y: [0, 8, 0] }}
@@ -147,7 +143,7 @@ export default function Home() {
                   }}
                   className="absolute -bottom-4 -left-4 glass-card px-4 py-2 text-sm font-medium"
                 >
-                  ISTQB Certified
+                  {t.hero.certified}
                 </motion.div>
               </div>
             </motion.div>
@@ -165,11 +161,19 @@ export default function Home() {
             variants={staggerContainer}
             className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6"
           >
-            {stats.map((stat) => (
-              <motion.div key={stat.label} variants={staggerItem}>
-                <StatCard label={stat.label} value={stat.value} />
-              </motion.div>
-            ))}
+            {stats.map((stat, i) => {
+              const statKeys = [
+                t.home.yearsOfExperience,
+                t.home.projectsCompleted,
+                t.home.certifications,
+                t.home.awards,
+              ];
+              return (
+                <motion.div key={stat.label} variants={staggerItem}>
+                  <StatCard label={statKeys[i]} value={stat.value} />
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -178,9 +182,9 @@ export default function Home() {
       <section className="section-padding">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Expertise"
-            title="Featured Skills"
-            description="Core competencies honed across enterprise SaaS, fintech, and cloud platforms."
+            eyebrow={t.home.featuredSkills}
+            title={t.home.featuredSkills}
+            description={t.home.featuredSkillsDescription}
           />
           <motion.div
             initial="hidden"
@@ -202,9 +206,9 @@ export default function Home() {
       <section className="section-padding bg-zinc-50/80 dark:bg-zinc-900/30">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Work"
-            title="Featured Projects"
-            description="Selected work demonstrating automation architecture, API quality, and engineering impact."
+            eyebrow={t.home.work}
+            title={t.home.portfolio}
+            description={t.home.portfolioDescription}
           />
           <motion.div
             initial="hidden"
@@ -247,7 +251,7 @@ export default function Home() {
           <div className="text-center mt-12">
             <Link to="/projects">
               <Button variant="outline">
-                View All Projects
+                {t.home.portfolio}
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>
@@ -259,9 +263,9 @@ export default function Home() {
       <section className="section-padding">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Impact"
-            title="Featured Achievements"
-            description="Measurable outcomes from quality engineering initiatives."
+            eyebrow={t.home.work}
+            title={t.home.portfolio}
+            description={t.home.portfolioDescription}
           />
           <motion.div
             initial="hidden"
@@ -294,9 +298,12 @@ export default function Home() {
       <section className="section-padding bg-zinc-50/80 dark:bg-zinc-900/30">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Testimonials"
-            title="What Leaders Say"
-            description="Feedback from engineering managers and directors I've partnered with."
+            eyebrow={t.home.testimonials || "Testimonials"}
+            title={t.home.testimonialsTitle || "What Leaders Say"}
+            description={
+              t.home.testimonialsDescription ||
+              "Feedback from engineering managers and directors I've partnered with."
+            }
           />
           <motion.div
             initial="hidden"
@@ -339,23 +346,22 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-violet-500/5" />
             <div className="relative z-10">
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight mb-4">
-                Let&apos;s build quality together
+                {t.home.contactCTA}
               </h2>
               <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto mb-8">
-                Open to senior QA roles, consulting engagements, and speaking
-                opportunities.
+                {t.home.contactDescription}
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link to="/contact">
                   <Button size="lg">
-                    Start a Conversation
+                    {t.home.contactButton}
                     <ExternalLink className="w-4 h-4" />
                   </Button>
                 </Link>
                 <a href={siteConfig.resumeUrl} download>
                   <Button variant="outline" size="lg">
                     <Download className="w-4 h-4" />
-                    Resume
+                    {t.hero.downloadResume}
                   </Button>
                 </a>
               </div>

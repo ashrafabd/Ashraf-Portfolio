@@ -1,36 +1,39 @@
-import { motion } from 'framer-motion'
-import { BookOpen, CheckCircle2, Clock } from 'lucide-react'
-import { usePageSEO } from '@/hooks/usePageSEO'
-import { courses } from '@/data/portfolio'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { Card } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
-import { staggerContainer, staggerItem, viewportOnce } from '@/lib/motion'
+import { motion } from "framer-motion";
+import { BookOpen, CheckCircle2, Clock } from "lucide-react";
+import { useTranslation } from "@/context/LocaleContext";
+import { usePageSEO } from "@/hooks/usePageSEO";
+import { courses } from "@/data/portfolio";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Card } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
+import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 export default function Courses() {
-  usePageSEO({
-    title: 'Courses',
-    description: 'Continuous learning journey and completed courses.',
-  })
+  const t = useTranslation();
 
-  const completed = courses.filter((c) => c.progress === 100).length
-  const inProgress = courses.filter((c) => c.progress < 100).length
+  usePageSEO({
+    title: t.nav.courses,
+    description: t.courses.description,
+  });
+
+  const completed = courses.filter((c) => c.progress === 100).length;
+  const inProgress = courses.filter((c) => c.progress < 100).length;
 
   return (
     <div>
       <section className="section-padding pt-24 lg:pt-32">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Learning"
-            title="Courses"
-            description="A commitment to continuous growth through structured learning and hands-on practice."
+            eyebrow={t.courses.eyebrow}
+            title={t.courses.title}
+            description={t.courses.description}
           />
 
           <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto mb-14">
             {[
-              { label: 'Total Courses', value: courses.length },
-              { label: 'Completed', value: completed },
-              { label: 'In Progress', value: inProgress },
+              { label: t.courses.totalCourses, value: courses.length },
+              { label: t.courses.completed, value: completed },
+              { label: t.courses.inProgress, value: inProgress },
             ].map((stat) => (
               <Card key={stat.label} hover={false} className="!p-4 text-center">
                 <p className="text-2xl font-bold text-gradient">{stat.value}</p>
@@ -47,13 +50,17 @@ export default function Courses() {
             className="max-w-3xl mx-auto space-y-0"
           >
             {courses.map((course, i) => (
-              <motion.div key={course.id} variants={staggerItem} className="flex gap-6">
+              <motion.div
+                key={course.id}
+                variants={staggerItem}
+                className="flex gap-6"
+              >
                 <div className="flex flex-col items-center">
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center ${
                       course.progress === 100
-                        ? 'bg-indigo-500 text-white'
-                        : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-500'
+                        ? "bg-indigo-500 text-white"
+                        : "bg-zinc-200 dark:bg-zinc-800 text-zinc-500"
                     }`}
                   >
                     {course.progress === 100 ? (
@@ -78,14 +85,14 @@ export default function Courses() {
                     {course.certificate && (
                       <Badge>
                         <BookOpen className="w-3 h-3 mr-1" />
-                        Certified
+                        {t.courses.certified}
                       </Badge>
                     )}
                   </div>
 
                   <div className="mb-4">
                     <div className="flex justify-between text-xs text-zinc-500 mb-1.5">
-                      <span>Progress</span>
+                      <span>{t.courses.progressLabel}</span>
                       <span>{course.progress}%</span>
                     </div>
                     <div className="h-2 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
@@ -113,5 +120,5 @@ export default function Courses() {
         </div>
       </section>
     </div>
-  )
+  );
 }

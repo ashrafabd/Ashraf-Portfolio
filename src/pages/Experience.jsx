@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Building2, Calendar, ChevronRight } from "lucide-react";
+import { useTranslation } from "@/context/LocaleContext";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { experiences, experienceFilters } from "@/data/portfolio";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -10,10 +11,11 @@ import { Card } from "@/components/ui/Card";
 import { viewportOnce } from "@/lib/motion";
 
 export default function Experience() {
+  const t = useTranslation();
+
   usePageSEO({
-    title: "Experience",
-    description:
-      "Professional experience timeline for Ashraf Muneer Abd Alkhaliq, Software Quality Assurance Engineer.",
+    title: t.nav.experience,
+    description: t.experience.description,
   });
 
   const [filter, setFilter] = useState("All");
@@ -31,9 +33,9 @@ export default function Experience() {
       <section className="section-padding pt-24 lg:pt-32">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Career"
-            title="Experience"
-            description="A track record of elevating quality across startups and enterprise technology companies."
+            eyebrow={t.experience.eyebrow}
+            title={t.experience.title}
+            description={t.experience.description}
           />
 
           <FilterTabs
@@ -121,7 +123,7 @@ export default function Experience() {
                     <div className="grid md:grid-cols-2 gap-8">
                       <div>
                         <h4 className="font-semibold text-sm uppercase tracking-wider text-zinc-500 mb-4">
-                          Responsibilities
+                          {t.experience.responsibilities}
                         </h4>
                         <ul className="space-y-3">
                           {active.responsibilities.map((item) => (
@@ -139,7 +141,7 @@ export default function Experience() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-sm uppercase tracking-wider text-zinc-500 mb-4">
-                          Achievements
+                          {t.experience.achievements}
                         </h4>
                         <ul className="space-y-3">
                           {active.achievements.map((item) => (

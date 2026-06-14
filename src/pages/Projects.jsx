@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Search } from "lucide-react";
 import { GithubIcon } from "@/components/ui/SocialIcons";
+import { useTranslation } from "@/context/LocaleContext";
 import { usePageSEO } from "@/hooks/usePageSEO";
 import { projects, projectFilters } from "@/data/portfolio";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -13,10 +14,11 @@ import { Button } from "@/components/ui/Button";
 import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 export default function Projects() {
+  const t = useTranslation();
+
   usePageSEO({
-    title: "Projects",
-    description:
-      "QA and automation projects by Ashraf Muneer Abd Alkhaliq — frameworks, APIs, and quality tooling.",
+    title: t.nav.projects,
+    description: t.projects.description,
   });
 
   const [filter, setFilter] = useState("All");
@@ -40,9 +42,9 @@ export default function Projects() {
       <section className="section-padding pt-24 lg:pt-32">
         <div className="container-wide mx-auto">
           <SectionHeading
-            eyebrow="Portfolio"
-            title="Projects"
-            description="A curated showcase of automation frameworks, API testing suites, and quality engineering tools."
+            eyebrow={t.projects.eyebrow}
+            title={t.projects.title}
+            description={t.projects.description}
           />
 
           <div className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-10 max-w-3xl mx-auto">
@@ -56,7 +58,7 @@ export default function Projects() {
           <SearchInput
             value={search}
             onChange={setSearch}
-            placeholder="Search projects, technologies..."
+            placeholder={t.projects.searchPlaceholder}
             className="max-w-md mx-auto mb-14"
           />
 
@@ -93,7 +95,7 @@ export default function Projects() {
                     <div className="space-y-3 mb-6 text-sm">
                       <div>
                         <span className="font-medium text-zinc-800 dark:text-zinc-200">
-                          Challenge:{" "}
+                          {t.projects.challenge}{" "}
                         </span>
                         <span className="text-zinc-600 dark:text-zinc-400">
                           {project.challenges}
@@ -101,7 +103,7 @@ export default function Projects() {
                       </div>
                       <div>
                         <span className="font-medium text-zinc-800 dark:text-zinc-200">
-                          Solution:{" "}
+                          {t.projects.solution}{" "}
                         </span>
                         <span className="text-zinc-600 dark:text-zinc-400">
                           {project.solutions}
@@ -109,7 +111,7 @@ export default function Projects() {
                       </div>
                       <div>
                         <span className="font-medium text-indigo-600 dark:text-indigo-400">
-                          Result:{" "}
+                          {t.projects.result}{" "}
                         </span>
                         <span className="text-zinc-600 dark:text-zinc-400">
                           {project.results}
@@ -134,7 +136,7 @@ export default function Projects() {
                         >
                           <Button variant="secondary" size="sm">
                             <GithubIcon className="w-4 h-4" />
-                            GitHub
+                            {t.projects.github}
                           </Button>
                         </a>
                       )}
@@ -142,7 +144,7 @@ export default function Projects() {
                         <a href={project.demo}>
                           <Button size="sm">
                             <ExternalLink className="w-4 h-4" />
-                            Demo
+                            {t.projects.demo}
                           </Button>
                         </a>
                       )}
@@ -156,7 +158,7 @@ export default function Projects() {
           {filtered.length === 0 && (
             <div className="text-center py-20 text-zinc-500">
               <Search className="w-12 h-12 mx-auto mb-4 opacity-30" />
-              <p>No projects match your search.</p>
+              <p>{t.projects.noMatch}</p>
             </div>
           )}
         </div>
