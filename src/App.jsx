@@ -1,16 +1,16 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { ThemeProvider } from '@/context/ThemeContext'
-import { Layout } from '@/components/layout/Layout'
-import Home from '@/pages/Home'
-import About from '@/pages/About'
-import Experience from '@/pages/Experience'
-import Projects from '@/pages/Projects'
-import Skills from '@/pages/Skills'
-import Certifications from '@/pages/Certifications'
-import Courses from '@/pages/Courses'
-import Awards from '@/pages/Awards'
-import Blog from '@/pages/Blog'
-import Contact from '@/pages/Contact'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { Layout } from "@/components/layout/Layout";
+import Home from "@/pages/Home";
+import About from "@/pages/About";
+import Experience from "@/pages/Experience";
+import Projects from "@/pages/Projects";
+import Skills from "@/pages/Skills";
+import Certifications from "@/pages/Certifications";
+import Courses from "@/pages/Courses";
+import Awards from "@/pages/Awards";
+import Blog from "@/pages/Blog";
+import Contact from "@/pages/Contact";
 
 export default function App() {
   return (
@@ -32,5 +32,5 @@ export default function App() {
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
-  )
+  );
 }
