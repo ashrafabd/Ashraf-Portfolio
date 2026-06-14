@@ -8,6 +8,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   base: "/Ashraf-Portfolio/",
+  build: {
+    outDir: "docs",
+  },
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
