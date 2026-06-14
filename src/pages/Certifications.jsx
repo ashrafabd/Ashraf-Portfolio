@@ -1,27 +1,28 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { ExternalLink, Award } from 'lucide-react'
-import { usePageSEO } from '@/hooks/usePageSEO'
-import { certifications, certProviders } from '@/data/portfolio'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { FilterTabs } from '@/components/ui/FilterTabs'
-import { Card } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
-import { staggerContainer, staggerItem, viewportOnce } from '@/lib/motion'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { ExternalLink, Award } from "lucide-react";
+import { usePageSEO } from "@/hooks/usePageSEO";
+import { certifications, certProviders } from "@/data/portfolio";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { FilterTabs } from "@/components/ui/FilterTabs";
+import { Card } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 export default function Certifications() {
   usePageSEO({
-    title: 'Certifications',
-    description: 'Professional certifications and credentials held by Ashraf Abd.',
-  })
+    title: "Certifications",
+    description:
+      "Professional certifications and credentials held by Ashraf Muneer Abd Alkhaliq.",
+  });
 
-  const [filter, setFilter] = useState('All')
+  const [filter, setFilter] = useState("All");
 
   const filtered =
-    filter === 'All'
+    filter === "All"
       ? certifications
-      : certifications.filter((c) => c.provider === filter)
+      : certifications.filter((c) => c.provider === filter);
 
   return (
     <div>
@@ -57,7 +58,9 @@ export default function Certifications() {
                     <Badge variant="outline">{cert.date}</Badge>
                   </div>
 
-                  <h3 className="text-lg font-semibold leading-snug mb-2">{cert.title}</h3>
+                  <h3 className="text-lg font-semibold leading-snug mb-2">
+                    {cert.title}
+                  </h3>
                   <p className="text-sm text-indigo-600 dark:text-indigo-400 mb-4">
                     {cert.organization}
                   </p>
@@ -86,5 +89,5 @@ export default function Certifications() {
         </div>
       </section>
     </div>
-  )
+  );
 }

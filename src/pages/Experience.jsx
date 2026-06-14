@@ -1,29 +1,30 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Building2, Calendar, ChevronRight } from 'lucide-react'
-import { usePageSEO } from '@/hooks/usePageSEO'
-import { experiences, experienceFilters } from '@/data/portfolio'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { FilterTabs } from '@/components/ui/FilterTabs'
-import { Badge } from '@/components/ui/Badge'
-import { Card } from '@/components/ui/Card'
-import { viewportOnce } from '@/lib/motion'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Building2, Calendar, ChevronRight } from "lucide-react";
+import { usePageSEO } from "@/hooks/usePageSEO";
+import { experiences, experienceFilters } from "@/data/portfolio";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { FilterTabs } from "@/components/ui/FilterTabs";
+import { Badge } from "@/components/ui/Badge";
+import { Card } from "@/components/ui/Card";
+import { viewportOnce } from "@/lib/motion";
 
 export default function Experience() {
   usePageSEO({
-    title: 'Experience',
-    description: 'Professional experience timeline for Ashraf Abd, Software QA Engineer.',
-  })
+    title: "Experience",
+    description:
+      "Professional experience timeline for Ashraf Muneer Abd Alkhaliq, Software Quality Assurance Engineer.",
+  });
 
-  const [filter, setFilter] = useState('All')
-  const [activeId, setActiveId] = useState(experiences[0].id)
+  const [filter, setFilter] = useState("All");
+  const [activeId, setActiveId] = useState(experiences[0].id);
 
   const filtered =
-    filter === 'All'
+    filter === "All"
       ? experiences
-      : experiences.filter((e) => e.category === filter)
+      : experiences.filter((e) => e.category === filter);
 
-  const active = experiences.find((e) => e.id === activeId) || filtered[0]
+  const active = experiences.find((e) => e.id === activeId) || filtered[0];
 
   return (
     <div>
@@ -39,10 +40,12 @@ export default function Experience() {
             filters={experienceFilters}
             active={filter}
             onChange={(f) => {
-              setFilter(f)
+              setFilter(f);
               const next =
-                f === 'All' ? experiences[0] : experiences.find((e) => e.category === f)
-              if (next) setActiveId(next.id)
+                f === "All"
+                  ? experiences[0]
+                  : experiences.find((e) => e.category === f);
+              if (next) setActiveId(next.id);
             }}
             className="mb-14"
           />
@@ -57,18 +60,22 @@ export default function Experience() {
                   whileHover={{ x: 4 }}
                   className={`w-full text-left p-5 rounded-2xl transition-all duration-200 ${
                     activeId === exp.id
-                      ? 'glass-card border-indigo-500/30 shadow-md'
-                      : 'hover:bg-zinc-100 dark:hover:bg-zinc-800/50'
+                      ? "glass-card border-indigo-500/30 shadow-md"
+                      : "hover:bg-zinc-100 dark:hover:bg-zinc-800/50"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="font-semibold">{exp.role}</p>
-                      <p className="text-sm text-zinc-500 mt-1">{exp.company}</p>
+                      <p className="text-sm text-zinc-500 mt-1">
+                        {exp.company}
+                      </p>
                     </div>
                     <ChevronRight
                       className={`w-4 h-4 transition-transform ${
-                        activeId === exp.id ? 'text-indigo-500 rotate-90' : 'text-zinc-400'
+                        activeId === exp.id
+                          ? "text-indigo-500 rotate-90"
+                          : "text-zinc-400"
                       }`}
                     />
                   </div>
@@ -122,7 +129,9 @@ export default function Experience() {
                               key={item}
                               className="text-sm text-zinc-600 dark:text-zinc-400 flex gap-2"
                             >
-                              <span className="text-indigo-500 shrink-0">·</span>
+                              <span className="text-indigo-500 shrink-0">
+                                ·
+                              </span>
                               {item}
                             </li>
                           ))}
@@ -138,7 +147,9 @@ export default function Experience() {
                               key={item}
                               className="text-sm text-zinc-600 dark:text-zinc-400 flex gap-2"
                             >
-                              <span className="text-indigo-500 shrink-0">✓</span>
+                              <span className="text-indigo-500 shrink-0">
+                                ✓
+                              </span>
                               {item}
                             </li>
                           ))}
@@ -172,7 +183,9 @@ export default function Experience() {
                   <p className="text-sm text-indigo-600 dark:text-indigo-400 font-medium">
                     {exp.duration}
                   </p>
-                  <p className="font-semibold">{exp.role} at {exp.company}</p>
+                  <p className="font-semibold">
+                    {exp.role} at {exp.company}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -180,5 +193,5 @@ export default function Experience() {
         </div>
       </section>
     </div>
-  )
+  );
 }

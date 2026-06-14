@@ -1,16 +1,20 @@
-import { motion } from 'framer-motion'
-import { GraduationCap, Heart, Compass, Target } from 'lucide-react'
-import { usePageSEO } from '@/hooks/usePageSEO'
-import { about } from '@/data/portfolio'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { Card } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
-import { staggerContainer, staggerItem, viewportOnce } from '@/lib/motion'
+import { motion } from "framer-motion";
+import { GraduationCap, Heart, Compass, Target } from "lucide-react";
+import { usePageSEO } from "@/hooks/usePageSEO";
+import { about } from "@/data/portfolio";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Card } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
+import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
-const valueIcons = [Heart, Compass, Target, GraduationCap]
+const valueIcons = [Heart, Compass, Target, GraduationCap];
 
 export default function About() {
-  usePageSEO({ title: 'About', description: 'Personal story and professional journey of Ashraf Abd, Software QA Engineer.' })
+  usePageSEO({
+    title: "About",
+    description:
+      "Personal story and professional journey of Ashraf Muneer Abd Alkhaliq, Software Quality Assurance Engineer.",
+  });
 
   return (
     <div>
@@ -29,7 +33,9 @@ export default function About() {
         <div className="container-wide mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div>
-              <h3 className="font-display text-2xl font-semibold mb-4">Professional Journey</h3>
+              <h3 className="font-display text-2xl font-semibold mb-4">
+                Professional Journey
+              </h3>
               <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">
                 {about.journey}
               </p>
@@ -42,7 +48,11 @@ export default function About() {
               className="space-y-0"
             >
               {about.timeline.map((item, i) => (
-                <motion.div key={item.year} variants={staggerItem} className="flex gap-6">
+                <motion.div
+                  key={item.year}
+                  variants={staggerItem}
+                  className="flex gap-6"
+                >
                   <div className="flex flex-col items-center">
                     <div className="w-3 h-3 rounded-full bg-indigo-500 ring-4 ring-indigo-500/20" />
                     {i < about.timeline.length - 1 && (
@@ -83,7 +93,9 @@ export default function About() {
                   <p className="text-indigo-600 dark:text-indigo-400 text-sm mt-1">
                     {edu.school} · {edu.year}
                   </p>
-                  <p className="text-zinc-600 dark:text-zinc-400 mt-3 text-sm">{edu.detail}</p>
+                  <p className="text-zinc-600 dark:text-zinc-400 mt-3 text-sm">
+                    {edu.detail}
+                  </p>
                 </Card>
               </motion.div>
             ))}
@@ -102,7 +114,7 @@ export default function About() {
             className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {about.values.map((value, i) => {
-              const Icon = valueIcons[i]
+              const Icon = valueIcons[i];
               return (
                 <motion.div key={value.title} variants={staggerItem}>
                   <Card className="text-center">
@@ -110,10 +122,12 @@ export default function About() {
                       <Icon className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
                     </div>
                     <h3 className="font-semibold mb-2">{value.title}</h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">{value.description}</p>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                      {value.description}
+                    </p>
                   </Card>
                 </motion.div>
-              )
+              );
             })}
           </motion.div>
         </div>
@@ -164,5 +178,5 @@ export default function About() {
         </div>
       </section>
     </div>
-  )
+  );
 }

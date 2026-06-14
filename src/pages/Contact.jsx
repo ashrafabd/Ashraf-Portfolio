@@ -1,24 +1,24 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Mail, MapPin, Send, CheckCircle } from 'lucide-react'
-import { GithubIcon, LinkedinIcon } from '@/components/ui/SocialIcons'
-import { usePageSEO } from '@/hooks/usePageSEO'
-import { siteConfig } from '@/data/portfolio'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { Card } from '@/components/ui/Card'
-import { Input } from '@/components/ui/Input'
-import { Textarea } from '@/components/ui/Textarea'
-import { Button } from '@/components/ui/Button'
-import { fadeInUp, viewportOnce } from '@/lib/motion'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, MapPin, Send, CheckCircle } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { usePageSEO } from "@/hooks/usePageSEO";
+import { siteConfig } from "@/data/portfolio";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Card } from "@/components/ui/Card";
+import { Input } from "@/components/ui/Input";
+import { Textarea } from "@/components/ui/Textarea";
+import { Button } from "@/components/ui/Button";
+import { fadeInUp, viewportOnce } from "@/lib/motion";
 
 function WorldMap() {
   const locations = [
-    { x: 22, y: 38, label: 'New York' },
-    { x: 48, y: 32, label: 'London' },
-    { x: 72, y: 45, label: 'Dubai' },
-    { x: 85, y: 52, label: 'Singapore' },
-    { x: 15, y: 55, label: 'Remote' },
-  ]
+    { x: 22, y: 38, label: "New York" },
+    { x: 48, y: 32, label: "London" },
+    { x: 72, y: 45, label: "Dubai" },
+    { x: 85, y: 52, label: "Singapore" },
+    { x: 15, y: 55, label: "Remote" },
+  ];
 
   return (
     <div className="relative w-full aspect-[2/1] rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900/50 border border-zinc-200/60 dark:border-zinc-800/60">
@@ -52,30 +52,32 @@ function WorldMap() {
         {siteConfig.location}
       </div>
     </div>
-  )
+  );
 }
 
 export default function Contact() {
   usePageSEO({
-    title: 'Contact',
-    description: 'Get in touch with Ashraf Abd for opportunities and collaborations.',
-  })
+    title: "Contact",
+    description:
+      "Get in touch with Ashraf Muneer Abd Alkhaliq for QA opportunities and collaborations.",
+  });
 
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    company: '',
-    subject: '',
-    message: '',
-  })
+    name: "",
+    email: "",
+    company: "",
+    subject: "",
+    message: "",
+  });
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    setSubmitted(true)
-  }
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
-  const update = (field) => (e) => setForm({ ...form, [field]: e.target.value })
+  const update = (field) => (e) =>
+    setForm({ ...form, [field]: e.target.value });
 
   return (
     <div>
@@ -99,7 +101,8 @@ export default function Contact() {
                   <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
                   <h3 className="text-xl font-semibold mb-2">Message sent!</h3>
                   <p className="text-zinc-600 dark:text-zinc-400">
-                    Thank you for reaching out. I&apos;ll get back to you within 48 hours.
+                    Thank you for reaching out. I&apos;ll get back to you within
+                    48 hours.
                   </p>
                 </Card>
               ) : (
@@ -107,19 +110,25 @@ export default function Contact() {
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label htmlFor="name" className="text-sm font-medium mb-2 block">
+                        <label
+                          htmlFor="name"
+                          className="text-sm font-medium mb-2 block"
+                        >
                           Name
                         </label>
                         <Input
                           id="name"
                           required
                           value={form.name}
-                          onChange={update('name')}
+                          onChange={update("name")}
                           placeholder="Your name"
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="text-sm font-medium mb-2 block">
+                        <label
+                          htmlFor="email"
+                          className="text-sm font-medium mb-2 block"
+                        >
                           Email
                         </label>
                         <Input
@@ -127,43 +136,52 @@ export default function Contact() {
                           type="email"
                           required
                           value={form.email}
-                          onChange={update('email')}
+                          onChange={update("email")}
                           placeholder="you@company.com"
                         />
                       </div>
                     </div>
                     <div>
-                      <label htmlFor="company" className="text-sm font-medium mb-2 block">
+                      <label
+                        htmlFor="company"
+                        className="text-sm font-medium mb-2 block"
+                      >
                         Company
                       </label>
                       <Input
                         id="company"
                         value={form.company}
-                        onChange={update('company')}
+                        onChange={update("company")}
                         placeholder="Your company (optional)"
                       />
                     </div>
                     <div>
-                      <label htmlFor="subject" className="text-sm font-medium mb-2 block">
+                      <label
+                        htmlFor="subject"
+                        className="text-sm font-medium mb-2 block"
+                      >
                         Subject
                       </label>
                       <Input
                         id="subject"
                         required
                         value={form.subject}
-                        onChange={update('subject')}
+                        onChange={update("subject")}
                         placeholder="What's this about?"
                       />
                     </div>
                     <div>
-                      <label htmlFor="message" className="text-sm font-medium mb-2 block">
+                      <label
+                        htmlFor="message"
+                        className="text-sm font-medium mb-2 block"
+                      >
                         Message
                       </label>
                       <Textarea
                         id="message"
                         required
                         value={form.message}
-                        onChange={update('message')}
+                        onChange={update("message")}
                         placeholder="Tell me about the opportunity..."
                       />
                     </div>
@@ -188,14 +206,26 @@ export default function Contact() {
                 <h3 className="font-semibold text-lg mb-4">Social Links</h3>
                 <div className="space-y-3">
                   {[
-                    { icon: LinkedinIcon, label: 'LinkedIn', href: siteConfig.social.linkedin },
-                    { icon: GithubIcon, label: 'GitHub', href: siteConfig.social.github },
-                    { icon: Mail, label: 'Email', href: siteConfig.social.email },
+                    {
+                      icon: LinkedinIcon,
+                      label: "LinkedIn",
+                      href: siteConfig.social.linkedin,
+                    },
+                    {
+                      icon: GithubIcon,
+                      label: "GitHub",
+                      href: siteConfig.social.github,
+                    },
+                    {
+                      icon: Mail,
+                      label: "Email",
+                      href: siteConfig.social.email,
+                    },
                   ].map(({ icon: Icon, label, href }) => (
                     <a
                       key={label}
                       href={href}
-                      target={href.startsWith('mailto') ? undefined : '_blank'}
+                      target={href.startsWith("mailto") ? undefined : "_blank"}
                       rel="noopener noreferrer"
                       className="flex items-center gap-4 p-4 rounded-xl glass-card hover:border-indigo-500/30 transition-colors group"
                     >
@@ -205,7 +235,9 @@ export default function Contact() {
                       <div>
                         <p className="font-medium">{label}</p>
                         <p className="text-sm text-zinc-500">
-                          {label === 'Email' ? siteConfig.email : 'Connect with me'}
+                          {label === "Email"
+                            ? siteConfig.email
+                            : "Connect with me"}
                         </p>
                       </div>
                     </a>
@@ -222,5 +254,5 @@ export default function Contact() {
         </div>
       </section>
     </div>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   Download,
@@ -8,9 +8,9 @@ import {
   Zap,
   Quote,
   ExternalLink,
-} from 'lucide-react'
-import heroGraphic from '@/assets/hero.png'
-import { usePageSEO } from '@/hooks/usePageSEO'
+} from "lucide-react";
+import heroGraphic from "@/assets/hero.png";
+import { usePageSEO } from "@/hooks/usePageSEO";
 import {
   siteConfig,
   stats,
@@ -18,12 +18,12 @@ import {
   projects,
   achievements,
   testimonials,
-} from '@/data/portfolio'
-import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
-import { Card } from '@/components/ui/Card'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { StatCard } from '@/components/ui/SkillBar'
+} from "@/data/portfolio";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
+import { Card } from "@/components/ui/Card";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { StatCard } from "@/components/ui/SkillBar";
 import {
   staggerContainer,
   staggerItem,
@@ -31,14 +31,14 @@ import {
   slideInLeft,
   slideInRight,
   viewportOnce,
-} from '@/lib/motion'
+} from "@/lib/motion";
 
-const iconMap = { shield: Shield, target: Target, zap: Zap }
+const iconMap = { shield: Shield, target: Target, zap: Zap };
 
 export default function Home() {
-  usePageSEO()
+  usePageSEO();
 
-  const featuredProjects = projects.slice(0, 3)
+  const featuredProjects = projects.slice(0, 3);
 
   return (
     <div>
@@ -59,16 +59,19 @@ export default function Home() {
             >
               <Badge className="mb-6">Available for opportunities</Badge>
               <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-zinc-900 dark:text-white leading-[1.05]">
-                {siteConfig.name.split(' ')[0]}
+                {siteConfig.name.split(" ")[0]}
                 <br />
-                <span className="text-gradient">{siteConfig.name.split(' ')[1]}</span>
+                <span className="text-gradient">
+                  {siteConfig.name.split(" ")[1]}
+                </span>
               </h1>
               <p className="mt-4 text-xl sm:text-2xl text-zinc-600 dark:text-zinc-400 font-medium">
                 {siteConfig.title}
               </p>
               <p className="mt-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl">
-                I help technology companies ship with confidence — building automation frameworks,
-                API test suites, and quality cultures that scale with your product.
+                I deliver manual and automation QA solutions for web
+                applications, with a strong focus on Cypress, API validation,
+                and reliable release quality.
               </p>
               <div className="flex flex-wrap gap-4 mt-10">
                 <a href={siteConfig.resumeUrl} download>
@@ -90,7 +93,11 @@ export default function Home() {
               initial="hidden"
               animate="visible"
               variants={slideInRight}
-              transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.7,
+                delay: 0.2,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="relative flex justify-center"
             >
               <div className="relative">
@@ -109,8 +116,12 @@ export default function Home() {
                           A
                         </div>
                         <div>
-                          <p className="font-semibold text-white">{siteConfig.name}</p>
-                          <p className="text-sm text-zinc-400">{siteConfig.title}</p>
+                          <p className="font-semibold text-white">
+                            {siteConfig.name}
+                          </p>
+                          <p className="text-sm text-zinc-400">
+                            {siteConfig.title}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -118,14 +129,22 @@ export default function Home() {
                 </div>
                 <motion.div
                   animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                   className="absolute -top-4 -right-4 glass-card px-4 py-2 text-sm font-medium"
                 >
                   7+ Years
                 </motion.div>
                 <motion.div
                   animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                   className="absolute -bottom-4 -left-4 glass-card px-4 py-2 text-sm font-medium"
                 >
                   ISTQB Certified
@@ -205,7 +224,9 @@ export default function Home() {
                   <Badge variant="outline" className="w-fit mb-3">
                     {project.category}
                   </Badge>
-                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {project.title}
+                  </h3>
                   <p className="text-zinc-600 dark:text-zinc-400 text-sm flex-1 leading-relaxed">
                     {project.description}
                   </p>
@@ -250,7 +271,7 @@ export default function Home() {
             className="grid md:grid-cols-3 gap-6"
           >
             {achievements.map((item) => {
-              const Icon = iconMap[item.icon]
+              const Icon = iconMap[item.icon];
               return (
                 <motion.div key={item.title} variants={staggerItem}>
                   <Card>
@@ -263,7 +284,7 @@ export default function Home() {
                     </p>
                   </Card>
                 </motion.div>
-              )
+              );
             })}
           </motion.div>
         </div>
@@ -321,7 +342,8 @@ export default function Home() {
                 Let&apos;s build quality together
               </h2>
               <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto mb-8">
-                Open to senior QA roles, consulting engagements, and speaking opportunities.
+                Open to senior QA roles, consulting engagements, and speaking
+                opportunities.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link to="/contact">
@@ -342,5 +364,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  )
+  );
 }
