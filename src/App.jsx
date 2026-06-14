@@ -15,7 +15,7 @@ import Contact from '@/pages/Contact'
 export default function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/Ashraf-Portfolio/">
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Home />} />
